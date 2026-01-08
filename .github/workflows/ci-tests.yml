@@ -37,7 +37,7 @@ jobs:
       - name: Run Cypress tests
         run: |
           cd "05_Automation_Testing/Cypress_testing"
-          npm cy:test:report
+          npm run cy:test:report
 
   selenium_python:
     runs-on: ubuntu-latest
