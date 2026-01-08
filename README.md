@@ -72,13 +72,13 @@ cd 03_Test_Execution/API_Test_execution
 
 newman run ./03_Test_Execution/API_Test_Execution/Final_of_Final.json -r cli,htmlextra --reporter-htmlextra-export ./03_Test_Execution/API_Test_Execution/API_Test_Report.html 
 #OR 
-newman run test:api
+npm run test:api
 
 
 # just run simple API Test   
 newman run ./03_Test_Execution/API_Test_Execution/Final_of_Final.json
 #OR
-newman run test:api:simple
+npm run test:api:simple
 
 
 
