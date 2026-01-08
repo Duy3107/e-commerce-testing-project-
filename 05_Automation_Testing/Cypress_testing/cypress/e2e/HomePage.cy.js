@@ -1,4 +1,5 @@
 import HomePage from '../pages/HomePage';
+import LogIn from '../pages/LogIn';
 
 describe('Home Page Navigation', () => {
 
@@ -32,7 +33,10 @@ describe('Home Page Navigation', () => {
         HomePage.clickContactUs();
         cy.url().should('include', '/contact_us');
     });
-    it('Should log out and navigate to Login page when clicking on Logout link', () => {           // tạm thời dùng it.skip để sau này làm xong LoginPage.js thì quay lại hoàn thành test này
+    it('Should log out and navigate to Login page when clicking on Logout link', () => {  
+        HomePage.clickLoginSignup();
+        LogIn.fillLoginForm('crisntdgamer@email.com','Test@12345678');
+        LogIn.clickLoginButton();         
         HomePage.clickLogout();
         HomePage.verifyHomePage();
         HomePage.clickLoginSignup();
