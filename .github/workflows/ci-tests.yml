@@ -1,0 +1,62 @@
+name: CI - E-commerce Testing
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  api_and_cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # Cài dependency từ package.json ở root
+      - name: Install Node dependencies (root)
+        run: npm install
+
+      # Chạy Newman API tests (dùng newman từ node_modules/.bin)
+      - name: Run Newman API tests
+        run: |
+          run: npm run test:api
+
+      # Cài dependency riêng cho Cypress (package.json trong Cypress_testing)
+      - name: Install Cypress dependencies
+        run: |
+          cd "05_Automation_Testing/Cypress_testing"
+          npm install
+
+      - name: Run Cypress tests
+        run: |
+          cd "05_Automation_Testing/Cypress_testing"
+          npx cypress run
+
+  selenium_python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          cd "05_Automation_Testing/Selenium_testing"
+          pip install -r requirements.txt
+
+      - name: Run Selenium tests
+        run: |
+          cd "05_Automation_Testing/Selenium_testing"
+          pytest tests/ --html=report_final_all_passed.html --self-contained-html
