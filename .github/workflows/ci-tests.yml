@@ -41,6 +41,8 @@ jobs:
 
   selenium_python:
     runs-on: ubuntu-latest
+    env:
+      BROWSER: chrome_ci 
 
     steps:
       - name: Checkout code

@@ -38,8 +38,8 @@ describe('Home Page Navigation', () => {
         LogIn.fillLoginForm('crisntdgamer@email.com','Test@12345678');
         LogIn.clickLoginButton();         
         HomePage.clickLogout();
+        HomePage.clickLogo();
         HomePage.verifyHomePage();
-        HomePage.clickLoginSignup();
     });
     it('Should navigate to Home page when clicking on Logo', () => {
         HomePage.clickLogo();
