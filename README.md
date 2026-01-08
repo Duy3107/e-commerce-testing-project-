@@ -47,15 +47,35 @@ To run this project locally, follow these steps:
 Use these commands in your terminal:
 
 ```bash
-# Run API tests with Newman and generate HTML report
+
+# Install Node.js dependencies (Newman & helpers)
+# From project root
+cd E-commerce Mini Testing project by TDuy
+
+npm install
+
+# Run API tests with Newman and generate HTML report    
 cd 03_Test_Execution/API_Test_execution
-newman run ./03_Test_Execution/API_Test_Execution/Final_of_Final.json -r cli,htmlextra --reporter-htmlextra-export ./03_Test_Execution/API_Test_Execution/API_Test_Report.html
-# Or just run simple API Test
+
+
+newman run ./03_Test_Execution/API_Test_Execution/Final_of_Final.json -r cli,htmlextra --reporter-htmlextra-export ./03_Test_Execution/API_Test_Execution/API_Test_Report.html 
+#OR 
+newman run test:api
+
+
+# just run simple API Test   
 newman run ./03_Test_Execution/API_Test_Execution/Final_of_Final.json
+#OR
+newman run test:api:simple
+
+
+
 
 # Run JMeter test plan (headless mode)
 cd 04_API_Performance_Testing
 jmeter -n -t Test_plan.jmx -l results.jtl -e -o ./report
+
+
 
 
 # Run Cypress tests
@@ -72,6 +92,15 @@ npx mochawesome-report-generator mochawesome.json --reportDir cypress/report --i
 # Run Selenium/Python tests
 cd 05_Automation_Testing/Selenium_testing
 # Create/activate virtual environment if necessary
+python -m venv venv
+# Activate virtual environment
+# Windows
+venv\Scripts\Activate.ps1
+# macOS / Linux
+source venv/bin/activate.bat
+
+
+# Install dependencies
 pip install -r requirements.txt
 pytest tests/
 # Generate HTML report for Selenium/Python
