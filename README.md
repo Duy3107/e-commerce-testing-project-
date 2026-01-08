@@ -102,6 +102,5 @@ source venv/bin/activate.bat
 
 # Install dependencies
 pip install -r requirements.txt
-pytest tests/
-# Generate HTML report for Selenium/Python
-pytest --html=report_final_all_passed.html --self-contained-html
+# Run all test and Generate HTML report for Selenium/Python
+pytest tests/ --html=report_final_all_passed.html --self-contained-html
