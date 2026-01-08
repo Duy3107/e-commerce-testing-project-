@@ -1,0 +1,22 @@
+# ==== Node / JavaScript ====
+node_modules/
+Node_module/
+package-lock.json
+mochawesome.json
+
+# ==== Python ====
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# ==== Cypress reports ====
+05_Automation_Testing/Cypress_testing/cypress/report/
+cypress/videos/
+cypress/screenshots/
+
+
+# ==== IDE / logs ====
+.vscode/
+.idea/
+*.log

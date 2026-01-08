@@ -1,0 +1,577 @@
+{
+	"info": {
+		"_postman_id": "f489533f-74d3-4eab-a6ab-763200fe88ff",
+		"name": "API Testing for e-commerce mini project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50982835",
+		"_collection_link": "https://ngthanhduy3107-653552.postman.co/workspace/Th%C3%A0nh-Duy-Nguy%E1%BB%85n's-Workspace~63abfadc-4a0d-44c4-87c8-d13be504a2e4/collection/50982835-f489533f-74d3-4eab-a6ab-763200fe88ff?action=share&source=collection_link&creator=50982835"
+	},
+	"item": [
+		{
+			"name": "API_TC_001 Get all products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://automationexercise.com/api/productsList",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"productsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_002 Get all brands",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automationexercise.com/api/brandsList",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"brandsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_003 Search Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"search_product\": \"{{$randomFullName}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automationexercise.com/api/searchProduct",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"searchProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_004 Search product negative",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://automationexercise.com/api/searchProduct",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"searchProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_005 Verify login valid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "crisntdgamer@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Test@12345678",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/verifyLogin",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_006 Verify login invalid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "crisntdgamer@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Test@1234567",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/verifyLogin",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_007 Create Account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Duy",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "Test44456@email.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Test@12345678",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Mr",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "birth_month",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "firstname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "india",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": "Hahaha",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/createAccount",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_008 Create account invalid phone number",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Duy",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "Te41244st@email.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Test@12345678",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Mr",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "birth_month",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "firstname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "india",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": "Hahahah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/createAccount",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_009 Create account with missing email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Duy",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Test@12345678",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Mr",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "birth_month",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "firstname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "india",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": "0916854458",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/createAccount",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_010 Delete an existing Account",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "crisntdgamer@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Test@12345678",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://automationexercise.com/api/deleteAccount",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"deleteAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_011 Delete an non-existing Account",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "crisntdgam123333er@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Test@12345678",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://automationexercise.com/api/deleteAccount",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"deleteAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_012 Error Handling invalid endpoint",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

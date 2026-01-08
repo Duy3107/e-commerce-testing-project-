@@ -1,0 +1,22 @@
+{
+  "name": "cypress_testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cypress.config.js",
+  "scripts": {
+  "cy:run": "cypress run",
+  "cy:merge": "mochawesome-merge \"cypress/report/mochawesome-report/*.json\" > mochawesome.json",
+  "cy:html": "npx mochawesome-report-generator mochawesome.json --reportDir cypress/report --inline",
+  "cy:test:report": "npm run cy:run && npm run cy:merge && npm run cy:html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cypress": "^15.8.2",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.0",
+    "mochawesome-report-generator": "^6.3.2"
+  }
+}

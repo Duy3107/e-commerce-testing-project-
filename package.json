@@ -1,0 +1,22 @@
+{
+  "name": "e-commerce-manual-testing-mini-project-by-tduy",
+  "version": "1.0.0",
+  "description": "E-commerce manual & API testing mini project",
+  "main": "index.js",
+  "scripts": {
+    "test:api": "newman run ./03_Test_Execution/API_Test_Execution/Final_of_Final.json -r cli,htmlextra --reporter-htmlextra-export ./03_Test_Execution/API_Test_Execution/API_Test_Report.html",
+    "test:api:simple": "newman run ./03_Test_Execution/API_Test_Execution/Final_of_Final.json"
+  },
+  "keywords": [],
+  "author": "Nguyen Thanh Duy",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "cypress": "^15.8.1",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.0",
+    "mochawesome-report-generator": "^6.3.2",
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
+  }
+}

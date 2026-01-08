@@ -1,0 +1,1043 @@
+{
+	"info": {
+		"_postman_id": "f489533f-74d3-4eab-a6ab-763200fe88ff",
+		"name": "API Testing for e-commerce mini project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50982835",
+		"_collection_link": "https://ngthanhduy3107-653552.postman.co/workspace/Th%C3%A0nh-Duy-Nguy%E1%BB%85n's-Workspace~63abfadc-4a0d-44c4-87c8-d13be504a2e4/collection/50982835-f489533f-74d3-4eab-a6ab-763200fe88ff?action=share&source=collection_link&creator=50982835"
+	},
+	"item": [
+		{
+			"name": "API_TC_001 Get all products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test Case 1: Kiểm tra Status Code phải là 200 OK\r",
+							"pm.test(\"API_TC_001 Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test Case 2: Kiểm tra dữ liệu trả về phải đúng định dạng JSON\r",
+							"pm.test(\"Response is in JSON format\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"// Test Case 3: Kiểm tra thời gian phản hồi API dưới 3s\r",
+							"pm.test(\"Response time is acceptable (<3000ms)\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"// Test Case 4: Kiểm tra Response Body có chứa danh sách sản phẩm (products array)\r",
+							"pm.test(\"Response body contains 'products' array\", function () {\r",
+							"    const body = pm.response.json();\r",
+							"    pm.expect(body.products).to.be.an('array');\r",
+							"    pm.expect(body.products.length).to.be.above(0); // Kiểm tra array không rỗng\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify Product have id, name, price\" , function(){\r",
+							"    const firstproduct = pm.response.json().products[0];\r",
+							"    pm.expect(firstproduct).to.have.property('id');\r",
+							"    pm.expect(firstproduct).to.have.property('name');\r",
+							"    pm.expect(firstproduct).to.have.property('price');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/productsList",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"productsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_002 Get all brands",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is in JSON format\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time must be below 4 second\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(4000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Brands to be an array\", function () {\r",
+							"    pm.expect(pm.response.json().brands).to.be.an(\"array\")\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Brand must have id and brand name\", function () {\r",
+							"    const body = pm.response.json().brands[0];\r",
+							"    pm.expect(body).to.have.property(\"id\");\r",
+							"    pm.expect(body).to.have.property(\"brand\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"No duplicate brand ids\", function () {\r",
+							"    const brands = pm.response.json().brands;       //tạo mảng brands \r",
+							"    const ids = brands.map(b => b.id);               //tạo thêm mảng ids lấy dữ liệu từ mảng brands  với mỗi phần tử b trong mảng thì trả về b.id\r",
+							"    const uniqueIds = new Set(ids);                   // hàm set chỉ giữ giá trị duy nhất không trùng lặp và gán vào uniqueIds\r",
+							"    pm.expect(uniqueIds.size).to.eql(ids.length);       // so sánh số lượng phần tử trong uniqueIds với số lượng phần tử trong ids, nếu bằng nhau thì không có phần tử trùng lặp trong mảng brands.\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/brandsList",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"brandsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_003 Search Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 3 seconds \", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is in JSON format\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Search products return array\", function () {\r",
+							"    pm.expect(pm.response.json().products).to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Search products have name, price,brand \", function () {\r",
+							"    const products = pm.response.json().products;\r",
+							"    products.forEach(b=>{\r",
+							"    pm.expect(b).to.have.property('name');\r",
+							"    pm.expect(b).to.have.property('price');\r",
+							"    pm.expect(b).to.have.property('brand');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "search_product",
+							"value": "{{search_keyword}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/searchProduct",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"searchProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_004 Search product negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"Response body is in JSON format\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response message is 'Bad request, search_product parameter is...'\", function () {  \r",
+							"    pm.expect(pm.response.text()).to.include(\"Bad request, search_product parameter is missing in POST request.\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"responseTime is less than 3 second\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response code in the body is 400 \", function () {\r",
+							"   const body = pm.response.json();\r",
+							"    pm.expect(body.responseCode).to.equal(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"search results return empty array\", function () {\r",
+							"    const body = pm.response.json();\r",
+							"    pm.expect(body).to.not.have.property(\"products\");      \r",
+							"\r",
+							"\r",
+							"  \r",
+							"      // pm.expect(body.products).to.be.an(\"array\");\r",
+							"    // pm.expect(body.products.length).to.eql(0);\r",
+							"});\r",
+							"    \r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/searchProduct",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"searchProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_007 Create Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is in JSON format\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body contain message 'User created!' and responseCode is 201\", function () {\r",
+							"    const body = pm.response.json();\r",
+							"    pm.expect(body.message).to.eql(\"User created!\");\r",
+							"    pm.expect(body.responseCode).to.eql(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2 seconds\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"const formData = pm.request.body.urlencoded;\r",
+							"\r",
+							"// Tìm field email\r",
+							"const email = formData.find(object => object.key === \"email\").value;\r",
+							"const password = formData.find(object => object.key === \"password\").value;\r",
+							"\r",
+							"// Lưu vào environment để dùng cho request sau\r",
+							"pm.collectionVariables.set(\"created_email_for_delete\", email);\r",
+							"pm.collectionVariables.set(\"created_password_for_delete\", password);\r",
+							"\r",
+							"pm.collectionVariables.set(\"created_email_for_login\", email);\r",
+							"pm.collectionVariables.set(\"created_password_for_login\", password);\r",
+							"\r",
+							"console.log(email)\r",
+							"console.log(password)"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Duy",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "{{$randomEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{$randomPassword}}",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Mr",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "birth_month",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "firstname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "india",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": "Hahaha",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/createAccount",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_008 Create account invalid phone number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is in JSON format\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"responseTime is less than 2 seconds\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response code hould be 400 and message contains 'invalid phone number'\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(400);\r",
+							"    pm.expect(pm.response.text()).to.include('invalid phone number');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Duy",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "{{$randomFullName}}@email.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{$randomPassword}}",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Mr",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "birth_month",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "firstname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "india",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": "{{$randomWords}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/createAccount",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_009 Create account with missing email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is in JSON format\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response message should be 'Please fill in email and response code should be 400'\", function () {\r",
+							"    pm.expect(pm.response.json().message).to.eql(\"Please fill in email\");\r",
+							"    pm.expect(pm.response.json().responseCode).to.eql(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Duy",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{$randomPassword}}",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Mr",
+							"type": "text"
+						},
+						{
+							"key": "birth_date",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "birth_month",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "firstname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "company",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "address2",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "india",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "D",
+							"type": "text"
+						},
+						{
+							"key": "mobile_number",
+							"value": "0916854458",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/createAccount",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_005 Verify login valid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is in JSON format\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"responseCode in the body is 200\", function () {\r",
+							"    const body = pm.response.json();\r",
+							"    pm.expect(body.responseCode).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body message is 'User exists!'\", () => {\r",
+							"    const body = pm.response.json();\r",
+							"    pm.expect(body.message).to.eql(\"User exists!\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2 seconds\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "{{created_email_for_login}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{created_password_for_login}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/verifyLogin",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_006 Verify login invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is in JSON format\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body should contain 'User not found!' and responseCode is 404\", function () {\r",
+							"    const body = pm.response.json();\r",
+							"    pm.expect(body.message).to.eql(\"User not found!\");\r",
+							"    pm.expect(body.responseCode).to.eql(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time should be less than 2 seconds\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "{{$randomEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{$randomPassword}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/verifyLogin",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_010 Delete an existing Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 or 204\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2 seconds\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response message contain 'Account deleted!'\", function () {\r",
+							"    const body = pm.response.json();\r",
+							"    pm.expect(body.message).to.equal('Account deleted!');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Delete same account again\", function () {\r",
+							"    const body = pm.response.json();\r",
+							"    pm.expect(body.responseCode).to.be.oneOf([404, 204]);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "{{created_email_for_delete}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{created_password_for_delete}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://automationexercise.com/api/deleteAccount",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"deleteAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_011 Delete an non-existing Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2 seconds\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response message contain 'Account not found!'\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Account not found!\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "{{$randomEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{$randomPassword}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://automationexercise.com/api/deleteAccount",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"deleteAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API_TC_012 Error Handling invalid endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is HTML for 404 page\", function () {\r",
+							"    const ct = pm.response.headers.get(\"Content-Type\");\r",
+							"    pm.expect(ct).to.include(\"text/html\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automationexercise.com/api/{{$randomWords}}",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"{{$randomWords}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": ""
+		},
+		{
+			"key": "search_keyword",
+			"value": ""
+		},
+		{
+			"key": "created_email_for_delete",
+			"value": ""
+		},
+		{
+			"key": "created_password_for_delete",
+			"value": ""
+		},
+		{
+			"key": "created_email_for_login",
+			"value": ""
+		},
+		{
+			"key": "created_password_for_login",
+			"value": ""
+		}
+	]
+}
