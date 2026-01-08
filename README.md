@@ -1,4 +1,5 @@
 # Project Title: E-commerce Mini Testing Project
+![CI](https://github.com/Duy3107/e-commerce-testing-project-/actions/workflows/ci-tests.yml/badge.svg)
 
 **This project is created by me—a self-trained tester who just got graduated and choose Testing to grow a career with.**
 
@@ -33,6 +34,17 @@ A clean structure helps recruiters understand your organization. You can describ
 *   **`04_API_Performance_Testing/`**: JMeter scripts and performance analysis reports.
 *   **`05_Automation_Testing/`**: Codebase for UI automation using Cypress and Selenium/Python.
 *   **`06_Bug_reports/`**: Logs of defects, screenshots, and summary report.
+
+
+### ✅ Continuous Integration (CI)
+
+This repository uses **GitHub Actions** to automatically run:
+
+- Newman API tests (`npm run test:api`)
+- Cypress UI tests with Mochawesome HTML report (`npm run cy:test:report`)
+- Selenium/Pytest UI tests with HTML report
+
+The workflow file is located at `.github/workflows/ci-tests.yml` and is triggered on every push and pull request to the `main` branch.
 
 ### ⚙️ Installation & Usage
 To run this project locally, follow these steps:
