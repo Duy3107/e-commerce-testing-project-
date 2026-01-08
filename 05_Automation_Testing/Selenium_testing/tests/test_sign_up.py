@@ -24,6 +24,7 @@ def test_sign_up_with_existing_email(driver):
 
     
 def test_sign_up_process(driver):
+    wait = WebDriverWait(driver, 10)
     temp = int(time.time())
     email = f"example+{temp}@email.com"
     sign_up = SignUp(driver)
@@ -33,8 +34,8 @@ def test_sign_up_process(driver):
     sign_up.click_signup()  
     assert sign_up.is_account_info_page_loaded()
     sign_up.enter_account_information()
-    assert "Account Created!" in driver.page_source
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'Account Created!')]")))
     sign_up.click_continue()
-    assert "Logged in as" in driver.page_source
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'Logged in as')]")))
 
 
